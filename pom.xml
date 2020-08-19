@@ -5,13 +5,13 @@
 
   <parent>
     <groupId>com.example.maven-project</groupId>
-    <artifactId>maven-project</artifactId>
+    <artifactId>nginx-maven-project</artifactId>
     <version>1.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>nginx</artifactId>
-  <packaging>war</packaging>
+  <packaging>maven-plugin</packaging>
   <name>nginx</name>
   <description>nginx.</description>
 
