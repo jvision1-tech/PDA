@@ -1,13 +1,9 @@
 # Pull base image 
-FROM alpine:3.10
+FROM nginx:alpine
 
 MAINTAINER " cokerawo@gmail.com"
 
-RUN apk update 
-RUN  apk add nginx 
+#copying index file contents into the container
+COPY index.html /usr/share/nginx/html/index.html
 
-COPY ./index.html /usr/share/nginx/html
-
-EXPOSE 8080
-#CMD ["nginx", "-g", "daemon off:"]
 
