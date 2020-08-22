@@ -1,4 +1,4 @@
-# Pull base image 
+# Pulls base image 
 FROM alpine:3.10
 apk update \
 && apk add nginx
