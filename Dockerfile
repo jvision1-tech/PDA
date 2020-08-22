@@ -4,7 +4,7 @@ RUN apk update
 RUN apk add nginx
 
 MAINTAINER " cokerawo@gmail.com"
-EXPOSE 80/tcp
+EXPOSE 8080/tcp
 CMD ["nginx", "g", "daemon off:"]
 #copying index file contents into the containers
 COPY index.html /usr/share/nginx/html/index.html
