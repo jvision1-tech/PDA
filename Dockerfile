@@ -1,12 +1,30 @@
-# Pulls base image 
+
 FROM alpine:3.10
-RUN apk update 
-RUN apk add nginx
 
-MAINTAINER " cokerawo@gmail.com"
-EXPOSE 80/tcp
-CMD ["nginx", "g", ]
-#copying index file contents into the containers
-COPY index.html /usr/share/nginx/html/index.html
+# envrionment
 
 
+ENV NGINX_DH_SIZE 2048
+ENV NGINX_SSL_SUBJECT /C=US/ST=MN/L=Minneapolis/O=August Ash/OU=Local Server/CN=*
+
+# packages & configure
+RUN apk-install nginx \
+    && mkdir -p \
+        /etc/nginx/conf.d \
+        /etc/nginx/hosts.d \
+        /etc/nginx/keys \
+        /socket \
+        /var/lib/nginx \
+    && rm -rf /etc/nginx/conf.d/* /etc/nginx/nginx.conf /var/lib/nginx/run \
+    && chown -R "${PUID}:${PGID}" /socket \
+    && apk-cleanup
+
+# copy root filesystem
+COPY rootfs /
+
+# external
+EXPOSE 80 443
+WORKDIR /src
+
+# run s6 supervisor
+ENTRYPOINT ["/init"]
